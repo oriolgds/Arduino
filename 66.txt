@@ -1,26 +1,42 @@
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-}
-int read = 0;
-int interval = 1000;
-void loop() {
-  async void checkinterval(){
-    
-  }
   digitalWrite(13, HIGH);
-  
-  
-  read = digitalRead(13);
-  if(read == 1){
-    digitalWrite(10, HIGH);
+  digitalWrite(12, HIGH);
+  digitalWrite(8, HIGH);
+}
+int readA = 0;
+int readB = 0;
+int interval = 600;
+void checkInterval(){
+  readA = digitalRead(13);
+  readB = digitalRead(12);
+
+  // Pulsas los dos
+  if(readA == 0 && readB == 0){
+    interval = 50;
+  }
+  // Pulsas arriba
+  else if(readA == 0){
+    interval = 200;
+  }
+  else if (readB == 0){
+    interval = 2000;
+  }
+  else if(readA == 1 && readB == 1){
+    interval = 600;
   }
   else {
-    digitalWrite(10, LOW);
+    interval = 600;
   }
+}
+void loop() {
+  
+  
+  checkInterval();
   digitalWrite(8, HIGH);
-  digitalWrite(6, HIGH);
-  Serial.println(read);
-  // put your main code here, to run repeatedly:
-
+  delay(interval);
+  checkInterval();
+  digitalWrite(8, LOW);
+  delay(interval);
 }
