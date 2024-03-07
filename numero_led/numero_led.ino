@@ -1,31 +1,21 @@
-void setup(){
+#include <LiquidCrystal.h>
 
-    for(int i = 1; i < 11; i = i + 1){
+//Crear el objeto LCD con los números correspondientes (rs, en, d4, d5, d6, d7)
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
-        pinMode(i, OUTPUT);
-
-    }
-
+void setup() {
+  // Inicializar el LCD con el número de  columnas y filas del LCD
+  lcd.begin(16, 2);
+  // Escribimos el Mensaje en el LCD.
+  lcd.print("Codelearn Mola");
 }
 
-void loop(){
-    digitalWrite(3, HIGH);
-
-    for(int j = 1; j < 11; j = j + 1){ //Vamos encendiendo todos los segmentos de uno a uno
-
-        digitalWrite(3, HIGH);
-
-        delay(400);
-
-    }
-
-    for(int j = 1; j < 11; j = j + 1){ //Vamos apagando todos los segmentos de uno a uno
-
-        digitalWrite(j, LOW);
-
-        delay(400);
-
-    }
-    
-
+void loop() {
+   // Ubicamos el cursor en la primera posición(columna:0) de la segunda línea(fila:1)
+  lcd.setCursor(0, 1);
+   // Escribimos el número de segundos trascurridos
+   lcd.print("x");
+  lcd.print(millis()/1000);
+  
+  delay(100);
 }
