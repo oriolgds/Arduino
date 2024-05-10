@@ -5,6 +5,7 @@ const int redPin = 6;
 const int bluePin = 5;
 const int greenPin = 3;
 
+const int motorPin = 2;
 long duration;
 int distance;
 
@@ -13,9 +14,10 @@ void setup() {
   pinMode(redPin, OUTPUT);
   pinMode(bluePin, OUTPUT);
   pinMode(greenPin, OUTPUT);
-
+  pinMode(motorPin, OUTPUT);
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
+
 }
 
 void ultra(){
@@ -62,7 +64,7 @@ void checkDistance(){
   }
 }
 void loop() {
-  
+  digitalWrite(motorPin, 1);
 
   // Fade in rojo
   for (int brightness = 0; brightness < 256; brightness++) {
@@ -118,20 +120,10 @@ void loop() {
   // Fade out azul
   for (int brightness = 255; brightness >= 0; brightness--) {
     analogWrite(bluePin, brightness);
-    analogWrite(redPin, 255);
+    analogWrite(redPin, 0);
     analogWrite(greenPin, 0);
-    analogWrite(bluePin, 0);
     checkDistance();    
     delayMicroseconds(1); // Ajusta la velocidad del fade out aquí
   }
-  checkDistance();
-  
-  
-  
-
-  
-  
-  
-  
-  
+  checkDistance();  
 }
