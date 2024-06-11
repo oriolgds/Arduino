@@ -4,8 +4,13 @@ int xInput[] = {A0};
 int yInput[] = {A1};
 int xOutput[] = {3};
 int yOutput[] = {5};
-int x[] = {0};
-int y[] = {0};
+
+const int center = 88;
+const int deadZone = 10;
+const int sprintV = 10;
+const int slowV = 3;
+int x[] = {center};
+int y[] = {center};
 
 const int number = 1;
 
@@ -36,12 +41,28 @@ void loop() {
     int yR = analogRead(yInput[i]);
     int xVal = map(xR, 0, 1023, 0, 179);
     int yVal = map(yR, 0, 1023, 0, 179);
-    x[i]=xVal;
-    Serial.println(yVal);
-    y[i]=yVal;
+    if(xVal < center - deadZone){
+      x[i] = x[i] - ;
+    }
+    else if(xVal >= 80 && xVal < 88){
+      x[i] = x[i] - 3;
+    }
+    if(xVal > 96){
+      x[i] = x[i] + 10;
+    }
+    else if(xVal <= 96 && xVal > 88){
+      x[i] = x[i] + 3;
+    }
+    if(yVal < 80){
+      y[i] = y[i] - 10;
+    }
+    if(yVal > 96){
+      y[i] = y[i] + 10;
+    }
   }
-  delay(100);
+  delay(10);
   sendAllServos();
+  delay(10);
 
   
  
