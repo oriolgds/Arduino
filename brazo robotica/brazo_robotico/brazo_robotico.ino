@@ -1,13 +1,14 @@
 #include <Servo.h>
 
-int xInput[] = {A0};
-int yInput[] = {A1};
+int xInput[] = {A1};
+int yInput[] = {A0};
 int xOutput[] = {3};
 int yOutput[] = {5};
 
 const int center = 88;
 const int deadZone = 50;
-const int sprintV = 3;
+const int centerDeadZone = 5;
+const int sprintV = 10;
 const int slowV = 1;
 int x[] = {center};
 int y[] = {center};
@@ -51,35 +52,37 @@ void loop() {
     int yR = analogRead(yInput[i]);
     int xVal = map(xR, 0, 1023, 0, 179);
     int yVal = map(yR, 0, 1023, 0, 179);
-    if(xVal < center - deadZone){
-      x[i] = x[i] - sprintV;
+    if(!(xVal > center - centerDeadZone && xVal < center + centerDeadZone)){
+      if(xVal < center - deadZone){
+        x[i] = x[i] - sprintV;
+      }
+      if(xVal >= center - deadZone && xVal < center){
+        x[i] = x[i] - slowV;
+      }
+      if(xVal > center + deadZone){
+        x[i] = x[i] + sprintV;
+      }
+      if(xVal <= center + deadZone && xVal > center){
+        x[i] = x[i] + slowV;
+      }
     }
-    if(xVal >= center - deadZone && xVal < center){
-      x[i] = x[i] - slowV;
-    }
-    if(xVal > center + deadZone){
-      x[i] = x[i] + sprintV;
-    }
-    if(xVal <= center + deadZone && xVal > center){
-      x[i] = x[i] + slowV;
-    }
-    if(yVal < center - deadZone){
-      y[i] = y[i] - sprintV;
-    }
-    if(yVal >= center - deadZone && yVal < center){
-      y[i] = y[i] - slowV;
-    }
-    if(yVal > center + deadZone){
-      y[i] = y[i] + sprintV;
-    }
-    if(yVal <= center + deadZone && yVal > center){
-      y[i] = y[i] + slowV;
-    }
+    if(!(yVal > center - centerDeadZone && yVal < center + centerDeadZone)){
+      if(yVal < center - deadZone){
+        y[i] = y[i] - sprintV;
+      }
+      if(yVal >= center - deadZone && yVal < center){
+        y[i] = y[i] - slowV;
+      }
+      if(yVal > center + deadZone){
+        y[i] = y[i] + sprintV;
+      }
+      if(yVal <= center + deadZone && yVal > center){
+        y[i] = y[i] + slowV;
+      }
+    }    
   }
-  delay(10);
   sendAllServos();
-  delay(10);
-
+  delay(100);
   
  
 }
