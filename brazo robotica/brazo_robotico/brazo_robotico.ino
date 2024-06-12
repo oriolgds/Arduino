@@ -6,9 +6,9 @@ int xOutput[] = {3};
 int yOutput[] = {5};
 
 const int center = 88;
-const int deadZone = 10;
-const int sprintV = 10;
-const int slowV = 3;
+const int deadZone = 50;
+const int sprintV = 3;
+const int slowV = 1;
 int x[] = {center};
 int y[] = {center};
 
@@ -54,25 +54,25 @@ void loop() {
     if(xVal < center - deadZone){
       x[i] = x[i] - sprintV;
     }
-    else if(xVal >= center - deadZone && xVal < center){
+    if(xVal >= center - deadZone && xVal < center){
       x[i] = x[i] - slowV;
     }
     if(xVal > center + deadZone){
       x[i] = x[i] + sprintV;
     }
-    else if(xVal <= center + deadZone && xVal > center){
+    if(xVal <= center + deadZone && xVal > center){
       x[i] = x[i] + slowV;
     }
     if(yVal < center - deadZone){
       y[i] = y[i] - sprintV;
     }
-    else if(yVal >= center - deadZone && yVal < center){
+    if(yVal >= center - deadZone && yVal < center){
       y[i] = y[i] - slowV;
     }
     if(yVal > center + deadZone){
       y[i] = y[i] + sprintV;
     }
-    else if(yVal <= center + deadZone && yVal > center){
+    if(yVal <= center + deadZone && yVal > center){
       y[i] = y[i] + slowV;
     }
   }
