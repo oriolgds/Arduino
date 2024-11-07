@@ -1,3 +1,4 @@
+// Using servo library, it can be easily installed with Arduino IDE
 #include <Servo.h>
 /*
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -26,7 +27,7 @@ All before was shit, now comes the important mandanga
 /*
 This code is completely escalable,
 you can add the amount of joysticks
-and servos that you board supports
+and servos that you want
 */
 
 // This 2 variables define in which pins are connected the joysticks.
@@ -38,7 +39,7 @@ int yInput[] = {A0, A3};
 int xOutput[] = {3, 10};
 int yOutput[] = {5, 9};
 
-// With this variables, you can change the deadline of the joystick depending on  it's drift
+// With this variables, you can change the deadline of the joystick depending on it's drift
 const int center = 88;
 const int deadZone = 50;
 const int centerDeadZone = 5;
@@ -49,14 +50,18 @@ const int slowV = 1;
 
 // This variables save the position of the servos
 // It's a temp variable
+// IMPORTANT! There must be as centers as joysticks in those vectors
 int x[] = {center, center};
 int y[] = {center, center};
 
+// IMPORTANT! This variable indicates how many joysticks have to be controled.
+// If you add a joystick you must increase this number
 const int number = 2;
 
 Servo servosX[number];
 Servo servosY[number];
 
+// This function prepares the servos and blocks them giving them power supply
 void setUpServos(){
   for(int i = 0; i<number; i++){
     servosX[i].attach(xOutput[i]);
@@ -64,6 +69,9 @@ void setUpServos(){
   }
 }
 
+// Servos go from 0 degres to 180
+// So any value exceding this range must be corrected
+// This is what this function does
 void checkAllOverValues(){
   for(int i = 0; i<number; i++){
     if(x[i] < 0){x[i] = 0;}
@@ -72,20 +80,23 @@ void checkAllOverValues(){
     if(y[i] > 180){y[i] = 180;}
   }
 }
+
+// This function writes in each loop the degrees to the servos
 void sendAllServos(){
   checkAllOverValues();
   for(int i = 0; i<number; i++){
     servosX[i].write(x[i]);
     servosY[i].write(y[i]);
-
   }
 }
+
+// Setting up servos and serial monitor
 void setup() {
   Serial.begin(9600);
   setUpServos();
-
 }
 
+// Reads the values for each joystick and writes values in each servo
 void loop() {
   for(int i = 0; i<number; i++){
     int xR = analogRead(xInput[i]);
@@ -126,5 +137,4 @@ void loop() {
   Serial.println(" ");
   sendAllServos();
   delay(100); 
- 
 }
