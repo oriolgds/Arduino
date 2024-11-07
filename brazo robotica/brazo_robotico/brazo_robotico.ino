@@ -19,19 +19,36 @@ To see more projects made by me that aren't Arduino head to:
 https://github.com/oriolgds/
 
 
+All before was shit, now comes the important mandanga
 */
 
 
+/*
+This code is completely escalable,
+you can add the amount of joysticks
+and servos that you board supports
+*/
+
+// This 2 variables define in which pins are connected the joysticks.
+// X axis and Y respectivelly
 int xInput[] = {A1, A2};
 int yInput[] = {A0, A3};
+// This 2 variables define in which pins are connected the servos
+// X axis and Y respectivelly
 int xOutput[] = {3, 10};
 int yOutput[] = {5, 9};
 
+// With this variables, you can change the deadline of the joystick depending on  it's drift
 const int center = 88;
 const int deadZone = 50;
 const int centerDeadZone = 5;
+
+// This variables change te velocity of the servos
 const int sprintV = 10;
 const int slowV = 1;
+
+// This variables save the position of the servos
+// It's a temp variable
 int x[] = {center, center};
 int y[] = {center, center};
 
