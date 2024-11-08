@@ -39,12 +39,12 @@ int yInput[] = {A0, A3};
 int xOutput[] = {3, 10};
 int yOutput[] = {5, 9};
 
-// With this variables, you can change the deadline of the joystick depending on it's drift
+// With this variables, you can change the deadzone of the joystick depending on it's drift
 const int center = 88;
 const int deadZone = 50;
 const int centerDeadZone = 5;
 
-// This variables change te velocity of the servos
+// This variables change the velocity of the servos
 const int sprintV = 10;
 const int slowV = 1;
 
