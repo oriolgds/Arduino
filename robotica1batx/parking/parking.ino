@@ -32,8 +32,8 @@ unsigned long tiempoUltimoMovimiento = 0;
 const unsigned long tiempoEsperaCierre = 3000; // 3 segundos para cerrar la barrera
 const int distanciaUmbral = 20;                // Distancia en cm para detectar un vehículo
 
-// Incluir la librería Servo
-#include <Servo.h>
+// Incluir la librería ESP32Servo
+#include <ESP32Servo.h>
 
 // Crear objetos Servo
 Servo servoEntrada;
@@ -57,9 +57,9 @@ void setup()
   pinMode(ledVerde, OUTPUT);
   pinMode(ledAzul, OUTPUT);
 
-  // Adjuntar servomotores
-  servoEntrada.attach(servoEntradaPin);
-  servoSalida.attach(servoSalidaPin);
+  // Adjuntar servomotores con rango de señal PWM para ESP32
+  servoEntrada.attach(servoEntradaPin, 500, 2500); // Rango típico de 500-2500 µs
+  servoSalida.attach(servoSalidaPin, 500, 2500);
 
   // Posición inicial de las barreras (cerradas)
   servoEntrada.write(0);
