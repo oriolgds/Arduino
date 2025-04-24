@@ -11,8 +11,8 @@ int pedGreenLight = 9; // Pin para la luz verde de peatones
 int pedButton = 7;     // Pin para el botón de peatones
 
 // Tiempos para cada color (en milisegundos)
-const unsigned long RED_TIME = 5000;      // 5 segundos en rojo
-const unsigned long GREEN_TIME = 4000;    // 4 segundos en verde
+const unsigned long RED_TIME = 10000;      // 5 segundos en rojo
+const unsigned long GREEN_TIME = 8000;    // 4 segundos en verde
 const unsigned long YELLOW_TIME = 1500;   // 1.5 segundos en amarillo
 const unsigned long PED_BLINK_TIME = 250; // 0.25 segundos para el parpadeo
 const unsigned long PED_TIME = 5000;      // 5 segundos para la solicitud de peatones
